@@ -13,7 +13,7 @@ object Day{
       , Day3
       , Day4
       , Day5
-    ).find(_.toString == "day"+value.toString).get //TODO: Circe?
+    ).find(_.toString == "Day"+value.toString).get //TODO: Circe?
 }
 trait Day{
   def filename = "src/resources/"+this.getClass.toString.drop(9).init
