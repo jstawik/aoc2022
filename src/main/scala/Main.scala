@@ -1,7 +1,6 @@
 @main def run: Unit = {
   print("Solve for day: ")
   val day = scala.io.StdIn.readInt()
-  //println(Day.lookup(day).output)
   println(Day.fromInt(day).output)
 
 }
@@ -19,7 +18,7 @@ object Day{
 trait Day{
   def filename = "src/resources/"+this.getClass.toString.drop(9).init
   lazy val input = io.Source.fromFile(filename).getLines().toList
-  val output1: Int
-  val output2: Int
-  def output = output1.toString + " " + output2.toString
+  val output1: String
+  val output2: String
+  def output = output1 + " " + output2
 }

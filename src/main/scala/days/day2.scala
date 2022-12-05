@@ -19,6 +19,6 @@ case object day2 extends Day{
     }
   }
 
-  val output1 = input.map(score1).sum
-  val output2 = input.map(score2).sum
+  val output1 = input.map(score1).sum.toString
+  val output2 = input.map(score2).sum.toString
 }

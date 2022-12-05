@@ -6,6 +6,6 @@ case object day1 extends Day{
       case None => parse(next, 0, accLI:+accI)
     }
   }
-  val output1 = parse(input).max
-  val output2 = parse(input).sortWith(_>_).take(3).sum
+  val output1 = parse(input).max.toString
+  val output2 = parse(input).sortWith(_>_).take(3).sum.toString
 }
