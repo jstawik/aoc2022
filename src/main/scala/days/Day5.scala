@@ -19,21 +19,24 @@ case class Instruction(count: Int, from: Int, to: Int){
 }
 
 case object Day5 extends Day{
-  val initState = Day5.input
+  val stateTemplate = Day5.input
     .takeWhile(_ != "")
     .map(_.toCharArray)
     .transpose
     .filter(_.exists(_.isDigit))
     .map(_.filter(_.isLetter))
-    .map(Stack(_*))
 
   val instructionSet = Day5.input.dropWhile(_ != "").drop(1).map(Instruction.fromString(_))
 
-  val state1 = initState.map(_.clone)
-  val state2 = initState.map(_.clone)
-  instructionSet.map(state1.commitInstruction9000(_))
-  instructionSet.map(state2.commitInstruction9001(_))
-  val output1 = state1.map(_.top).mkString
-  val output2 = state2.map(_.top).mkString
+  val output1 = {
+    val state = stateTemplate.map(Stack(_*))
+    instructionSet.map(state.commitInstruction9000(_))
+    state.map(_.top).mkString
+  }
+  val output2 = {
+    val state = stateTemplate.map(Stack(_*))
+    instructionSet.map(state.commitInstruction9001(_))
+    state.map(_.top).mkString
+  }
 }
 
