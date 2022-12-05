@@ -18,8 +18,8 @@ case class Instruction(count: Int, from: Int, to: Int){
   def repeat(action: => Unit): Unit = for _ <- 0 until count do action
 }
 
-case object day5 extends Day{
-  val initState = day5.input
+case object Day5 extends Day{
+  val initState = Day5.input
     .takeWhile(_ != "")
     .map(_.toCharArray)
     .transpose
@@ -27,7 +27,7 @@ case object day5 extends Day{
     .map(_.filter(_.isLetter))
     .map(Stack(_*))
 
-  val instructionSet = day5.input.dropWhile(_ != "").drop(1).map(Instruction.fromString(_))
+  val instructionSet = Day5.input.dropWhile(_ != "").drop(1).map(Instruction.fromString(_))
 
   val state1 = initState.map(_.clone)
   val state2 = initState.map(_.clone)

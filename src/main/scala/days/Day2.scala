@@ -1,4 +1,4 @@
-case object day2 extends Day{
+case object Day2 extends Day{
   def parse(in: Char): Int = in match {
     case 'A' | 'X' => 1
     case 'B' | 'Y' => 2

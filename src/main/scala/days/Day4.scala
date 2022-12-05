@@ -1,4 +1,4 @@
-case object day4 extends Day{
+case object Day4 extends Day{
   def line2ranges(line: String): Array[Int] = {
     line.split(",").flatMap(_.split("-")).map(_.toInt)
   }

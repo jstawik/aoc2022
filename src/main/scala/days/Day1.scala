@@ -1,4 +1,4 @@
-case object day1 extends Day{
+case object Day1 extends Day{
   def parse(remn: List[String], accI: Int = 0, accLI: List[Int] = List.empty[Int]): List[Int] = remn match {
     case Nil => accLI :+ accI 
     case head :: next => head.toIntOption match {

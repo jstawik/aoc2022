@@ -8,11 +8,11 @@
 object Day{
   def fromInt(value: Int): Day = 
     Vector(
-        day1
-      , day2
-      , day3
-      , day4
-      , day5
+        Day1
+      , Day2
+      , Day3
+      , Day4
+      , Day5
     ).find(_.toString == "day"+value.toString).get //TODO: Circe?
 }
 trait Day{
