@@ -13,6 +13,7 @@ object Day{
       , Day3
       , Day4
       , Day5
+      , Day6
     ).find(_.toString == "Day"+value.toString).get //TODO: Circe?
 }
 trait Day{
