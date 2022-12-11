@@ -10,25 +10,28 @@ object Coords {
 case class Coords(x: Int, y: Int){
     def +(that: Coords): Coords = Coords(this.x + that.x, this.y + that.y)
     def -(that: Coords): Coords = Coords(this.x - that.x, this.y - that.y)
-}
-case class Tail(position: Coords, offset: Coords){
-    def ->(pull: Coords): Tail = { 
-        val sum = offset + pull
-        if (sum.x.abs > 1 || sum.y.abs > 1) Tail (position + offset, pull)
-        else this.copy(offset = sum)
+    def dist(that: Coords): Int = { val diff = this - that; diff.x.abs.max(diff.y.abs) }
+    def pull(that: Coords): Coords = {
+        if(this.dist(that) < 2) that
+        else (this-that) match { case c => Coords(c.x.sign, c.y.sign) + that}
     }
 }
+
 case object Day9 extends Day {
     def parseLine(line: String): List[Coords] = List().padTo(line.split(" ")(1).toInt, Coords.fromChar(line(0)))
     val moves: List[Coords] = input.flatMap(parseLine(_))
-    val output1 = {
-        def traceTail(input: List[Coords], history: List[Tail]): List[Tail] = input match {
-            case Nil => history
-            case head :: next => traceTail(next, history :+ history.last -> head)
-        }
-        traceTail(moves, List(Tail(Coords(), Coords()))).map(_.position).toSet.size.toString
+    def traceTail(input: List[Coords], history: List[List[Coords]]): List[List[Coords]] = input match {
+        case Nil => history
+        case in :: ins => 
+            val jerkedkHead = history.last.head + in
+            val newState: List[Coords] = history.last.tail.foldLeft(List(jerkedkHead))((prev, curr) => prev :+ prev.last.pull(curr)) 
+            traceTail(ins, history :+ newState)
     }
-    val output2 = {
-        ""
+    def simulateRope(segments: Int): List[List[Coords]] = traceTail(moves, List(List().padTo(segments, Coords())))
+    val output1 = { // 6284 correct
+        simulateRope(2).map(_.last).toSet.size.toString
+    }
+    val output2 = { //2953 too high
+        simulateRope(10).map(_.last).toSet.size.toString
     }
 }
